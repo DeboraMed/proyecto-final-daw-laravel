@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+# TODO: Revisar la obligatoriedad 'nullable' de atributos
+
 return new class extends Migration
 {
     /**
@@ -19,6 +21,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('description')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('avatar')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

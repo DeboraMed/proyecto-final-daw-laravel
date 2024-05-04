@@ -1,0 +1,29 @@
+### Registra un nuevo usuario.
+POST http://localhost:8000/api/v1/register
+Content-Type: application/json
+
+{
+    "name": "Nuevo Usuario",
+    "email": "nuevo@usuario.com",
+    "password": "mi_contraseña_segura"
+}
+
+### Accede al sistema y devuelve un token.
+POST http://localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "test_password"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Devuelve el usuario activo actual
+GET http://localhost:8000/api/v1/user
+Authorization: Bearer {{auth_token}}
+
+
+### Anula el token activo, terminando la sesion del usuario
+GET http://localhost:8000/api/v1/logout
+Authorization: Bearer {{auth_token}}
