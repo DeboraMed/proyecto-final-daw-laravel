@@ -27,10 +27,13 @@ class AuthController extends Controller
         }
     }
 
-    public function user(Request $request)
+
+    public function user()
     {
-        return $request->user();
+        $user = auth()->user()->load('userable');
+        return response()->json(['user' => $user], 200);
     }
+
 
     public function logout(Request $request)
     {

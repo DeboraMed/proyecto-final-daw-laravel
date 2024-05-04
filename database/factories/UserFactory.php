@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\Developer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,6 +25,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $userTypesArray = [
+            Company::class,
+            Developer::class,
+        ]; // Add new noteables here as we make them
+        $randomUserType = fake()->randomElement($userTypesArray);
+        $userable = $randomUserType::factory()->create();
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -32,7 +41,9 @@ class UserFactory extends Factory
             'description' => fake()->paragraph(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'avatar' => fake()->imageUrl()
+            'avatar' => fake()->imageUrl(),
+            'userable_type' => $randomUserType,
+            'userable_id' => $userable->id,
         ];
     }
 
