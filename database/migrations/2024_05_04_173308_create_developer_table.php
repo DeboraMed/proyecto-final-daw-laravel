@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('specialization')->nullable();
             $table->string('schedule')->nullable();
             $table->string('work_mode')->nullable();
-            $table->string('contract-type')->nullable();
+            $table->string('contract_type')->nullable();
             $table->string('github_url')->nullable();
         });
     }

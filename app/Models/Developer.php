@@ -16,6 +16,10 @@ class Developer extends Model
 
     protected $fillable = [
         'github_url',
+        'contract_type',
+        'work_mode',
+        'schedule',
+        'specialization',
     ];
 
     protected $casts = [

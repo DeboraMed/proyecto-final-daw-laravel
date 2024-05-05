@@ -1,11 +1,36 @@
-### Registra un nuevo usuario.
+### Registra un nuevo usuario de tipo Empresa.
 POST http://localhost:8000/api/v1/register
 Content-Type: application/json
 
 {
-    "name": "Nuevo Usuario",
-    "email": "nuevo@usuario.com",
-    "password": "mi_contraseña_segura"
+    "name": "Nueva Empresa",
+    "email": "nuevo@empresa.com",
+    "password": "mi_contraseña_segura",
+    "user_type": "empresa",
+    "description": "Mi Descripcion",
+    "phone": "762 812 345",
+    "address": "Mi Direccion de Empresa",
+    "avatar": "http://cosas.jpg"
+}
+
+### Registra un nuevo usuario de tipo Desarrollador.
+POST http://localhost:8000/api/v1/register
+Content-Type: application/json
+
+{
+    "name": "Nuevo Desarrollador",
+    "email": "nuevo@desarrollador.com",
+    "password": "mi_contraseña_segura",
+    "user_type": "desarrollador",
+    "description": "Mi Descripcion",
+    "phone": "456 34 23 43",
+    "address": "Mi Direccion de Desarrollador",
+    "avatar": "http://cosas_dev.jpg",
+    "contract_type": "Indefinido",
+    "work_mode": "Hibrido",
+    "schedule": "Completa",
+    "specialization": "Administrador de Sistemas",
+    "github_url": "http://github/mio"
 }
 
 ### Accede al sistema y devuelve un token.

@@ -21,7 +21,7 @@ class DeveloperFactory extends Factory
     public function definition(): array
     {
         return [
-            'contract-type' => fake()->randomElement(ContractTypeEnum::cases())->value,
+            'contract_type' => fake()->randomElement(ContractTypeEnum::cases())->value,
             'work_mode' => fake()->randomElement(WorkModeEnum::cases())->value,
             'schedule' => fake()->randomElement(ScheduleEnum::cases())->value,
             'specialization' => fake()->randomElement(SpecializationEnum::cases())->value,
