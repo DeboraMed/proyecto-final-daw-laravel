@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Enums\ContractTypeEnum;
+use App\Enums\ScheduleEnum;
+use App\Enums\SpecializationEnum;
+use App\Enums\WorkModeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,10 +21,10 @@ class DeveloperFactory extends Factory
     public function definition(): array
     {
         return [
-            'especialidad' => fake()->word(),
-            'jornada' => fake()->word(),
-            'modalidad' => fake()->word(),
             'contract-type' => fake()->randomElement(ContractTypeEnum::cases())->value,
+            'work_mode' => fake()->randomElement(WorkModeEnum::cases())->value,
+            'schedule' => fake()->randomElement(ScheduleEnum::cases())->value,
+            'specialization' => fake()->randomElement(SpecializationEnum::cases())->value,
             'github_url' => fake()->url()
         ];
     }

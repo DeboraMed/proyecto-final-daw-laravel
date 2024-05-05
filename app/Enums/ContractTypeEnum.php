@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum ContractTypeEnum: string
 {
-    case Indefinido = 'indefinido';
-    case Temporal = 'temporal';
-    case Practicas = 'practicas';
-    case Autonomo = 'autonomo';
-    case ObraYServicio = 'obra y servicio';
+    case Indefinido = 'Indefinido';
+    case Temporal = 'Temporal';
+    case Practicas = 'Practicas';
+    case Autonomo = 'Autonomo';
+    case ObraYServicio = 'Obra y Servicio';
 }

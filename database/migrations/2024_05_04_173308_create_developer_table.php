@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('developers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('especialidad')->nullable();
-            $table->string('jornada')->nullable();
-            $table->string('modalidad')->nullable();
+            $table->string('specialization')->nullable();
+            $table->string('schedule')->nullable();
+            $table->string('work_mode')->nullable();
             $table->string('contract-type')->nullable();
             $table->string('github_url')->nullable();
         });
