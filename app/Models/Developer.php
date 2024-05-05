@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContractTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -14,8 +15,11 @@ class Developer extends Model
         'especialidad',
         'jornada',
         'modalidad',
-        'tipo-contrato',
         'github_url',
+    ];
+
+    protected $casts = [
+        'contract_type' => ContractTypeEnum::class,
     ];
 
     public function user(): MorphOne

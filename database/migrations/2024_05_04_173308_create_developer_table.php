@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('especialidad')->nullable();
             $table->string('jornada')->nullable();
             $table->string('modalidad')->nullable();
-            $table->string('tipo-contrato')->nullable();
+            $table->string('contract-type')->nullable();
             $table->string('github_url')->nullable();
         });
     }

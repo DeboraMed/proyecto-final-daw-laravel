@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ContractTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class DeveloperFactory extends Factory
             'especialidad' => fake()->word(),
             'jornada' => fake()->word(),
             'modalidad' => fake()->word(),
-            'tipo-contrato' => fake()->word(),
+            'contract-type' => fake()->randomElement(ContractTypeEnum::cases())->value,
             'github_url' => fake()->url()
         ];
     }
