@@ -1,0 +1,12 @@
+### Obtiene el listado enumerado 'contract-type' como array en json
+GET http://localhost:8000/api/v1/contract-type
+
+### Obtiene el listado enumerado 'schedule' como array en json
+GET http://localhost:8000/api/v1/schedule
+
+### Obtiene el listado enumerado 'specialization' como array en json
+GET http://localhost:8000/api/v1/specialization
+
+### Obtiene el listado enumerado 'work-mode' como array en json
+GET http://localhost:8000/api/v1/work-mode
+

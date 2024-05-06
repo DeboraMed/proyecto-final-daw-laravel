@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EnumController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,7 +12,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
 
-
+    Route::get('contract-type', [EnumController::class, 'contractType']);
+    Route::get('schedule', [EnumController::class, 'schedule']);
+    Route::get('specialization', [EnumController::class, 'specialization']);
+    Route::get('work-mode', [EnumController::class, 'workMode']);
 });
 
 // Metodos que requieren autenticacion via token.
