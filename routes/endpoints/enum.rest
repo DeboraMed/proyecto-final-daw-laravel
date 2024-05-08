@@ -10,3 +10,11 @@ GET http://localhost:8000/api/v1/specialization
 ### Obtiene el listado enumerado 'work-mode' como array en json
 GET http://localhost:8000/api/v1/work-mode
 
+### Obtiene el listado enumerado 'work-mode' como array en json
+GET http://localhost:8000/api/v1/academic-level
+
+### Obtiene el listado enumerado 'work-mode' como array en json
+GET http://localhost:8000/api/v1/experience-level
+
+### Obtiene el listado enumerado 'work-mode' como array en json
+GET http://localhost:8000/api/v1/technology-type

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AcademicLevelEnum;
 use App\Enums\ContractTypeEnum;
+use App\Enums\ExperienceLevelEnum;
 use App\Enums\ScheduleEnum;
 use App\Enums\SpecializationEnum;
+use App\Enums\TechnologyTypeEnum;
 use App\Enums\WorkModeEnum;
 use App\Models\Company;
 use App\Models\Developer;
@@ -48,6 +51,21 @@ class EnumController extends Controller
     public function workMode()
     {
         return response()->json(self::toArray(WorkModeEnum::class));
+    }
+
+    public function academicLevel()
+    {
+        return response()->json(self::toArray(AcademicLevelEnum::class));
+    }
+
+    public function experienceLevel()
+    {
+        return response()->json(self::toArray(ExperienceLevelEnum::class));
+    }
+
+    public function technologyType()
+    {
+        return response()->json(self::toArray(TechnologyTypeEnum::class));
     }
 
 }

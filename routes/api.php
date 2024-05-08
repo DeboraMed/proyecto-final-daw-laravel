@@ -16,6 +16,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('schedule', [EnumController::class, 'schedule']);
     Route::get('specialization', [EnumController::class, 'specialization']);
     Route::get('work-mode', [EnumController::class, 'workMode']);
+    Route::get('academic-level', [EnumController::class, 'academicLevel']);
+    Route::get('experience-level', [EnumController::class, 'experienceLevel']);
+    Route::get('technology-type', [EnumController::class, 'technologyType']);
 });
 
 // Metodos que requieren autenticacion via token.
