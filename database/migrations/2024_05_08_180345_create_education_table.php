@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('education', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('institution')->nullable();
+            $table->string('qualification')->nullable();
+            $table->string('academic_level')->nullable();
+            $table->date('completion_date')->nullable();
         });
     }
 

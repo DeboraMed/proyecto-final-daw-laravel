@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('contract_type')->nullable();
+            $table->string('work_mode')->nullable();
+            $table->string('schedule')->nullable();
+            $table->date('date')->nullable();
         });
     }
 
