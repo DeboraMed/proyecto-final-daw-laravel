@@ -9,6 +9,7 @@ use App\Enums\SpecializationEnum;
 use App\Enums\WorkModeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Education extends Model
@@ -25,4 +26,9 @@ class Education extends Model
     protected $casts = [
         'academic_level' => AcademicLevelEnum::class,
     ];
+
+    public function developer(): BelongsTo
+    {
+        return $this->belongsTo(Developer::class);
+    }
 }

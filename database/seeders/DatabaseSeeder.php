@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
+use App\Models\Developer;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Vacancy;
@@ -18,18 +21,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        User::factory(50)->create();
 
-        // Forzamos unas credenciales especificas para uno de los usuarios
-        $first_user = User::first();
-        $first_user->name = 'User Test';
-        $first_user->email = 'test@example.com';
-        $first_user->password = Hash::make('test_password');
-        $first_user->save();
+        Company::all()->each(
+            function ($company) {
+                Vacancy::factory(5)->for($company)->create();
+            });
 
-        Education::factory(10)->create();
-        Experience::factory(10)->create();
-        Project::factory(10)->create();
-        Vacancy::factory(10)->create();
+        Developer::all()->each(
+            function ($developer) {
+                Project::factory(3)->for($developer)->create();
+                Experience::factory(3)->for($developer)->create();
+                Education::factory(3)->for($developer)->create();
+            });
+
+        $technologies = Technology::all();
+
+        Vacancy::all()->each(
+            function ($vacancy) use ($technologies) {
+                $vacancy->technologies()->attach(
+                    $technologies->random(2)->pluck('id')->toArray()
+                );
+            });
+
+        Project::all()->each(
+            function ($project) use ($technologies) {
+                $project->technologies()->attach(
+                    $technologies->random(3)->pluck('id')->toArray()
+                );
+            });
+
+        Experience::all()->each(
+            function ($experience) use ($technologies) {
+                $experience->technologies()->attach(
+                    $technologies->random(3)->pluck('id')->toArray()
+                );
+            });
+
+        $user = Developer::first()->user;
+        $user->email = 'dev@test.com';
+        $user->password = Hash::make('dev_password');
+        $user->save();
+
+        $user = Company::first()->user;
+        $user->email = 'comp@test.com';
+        $user->password = Hash::make('comp_password');
+        $user->save();
     }
 }

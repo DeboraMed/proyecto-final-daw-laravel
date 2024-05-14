@@ -8,6 +8,7 @@ use App\Enums\SpecializationEnum;
 use App\Enums\WorkModeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Developer extends Model
@@ -33,4 +34,20 @@ class Developer extends Model
     {
         return $this->morphOne(User::class, 'userable');
     }
+
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    public function education(): HasMany
+    {
+        return $this->hasMany(Education::class);
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }

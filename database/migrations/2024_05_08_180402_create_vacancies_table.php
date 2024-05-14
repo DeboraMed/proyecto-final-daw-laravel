@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('work_mode')->nullable();
             $table->string('schedule')->nullable();
             $table->date('date')->nullable();
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
+
         });
     }
 

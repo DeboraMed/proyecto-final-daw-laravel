@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('qualification')->nullable();
             $table->string('academic_level')->nullable();
             $table->date('completion_date')->nullable();
+            $table->foreignId('developer_id')->constrained()->onDelete('cascade');
+
         });
     }
 
