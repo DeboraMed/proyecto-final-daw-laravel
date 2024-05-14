@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Technology extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'name',
         'type',

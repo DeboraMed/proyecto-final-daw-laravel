@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EnumController;
+use App\Http\Controllers\TechnologyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('academic-level', [EnumController::class, 'academicLevel']);
     Route::get('experience-level', [EnumController::class, 'experienceLevel']);
     Route::get('technology-type', [EnumController::class, 'technologyType']);
+    Route::get('technologies', [TechnologyController::class, 'index']);
 });
 
 // Metodos que requieren autenticacion via token.

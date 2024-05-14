@@ -1,0 +1,2 @@
+### Obtiene el listado completo de tecnologias
+GET http://localhost:8000/api/v1/technologies
