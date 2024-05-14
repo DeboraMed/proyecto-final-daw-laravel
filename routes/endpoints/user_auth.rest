@@ -33,13 +33,24 @@ Content-Type: application/json
     "github_url": "http://github/mio"
 }
 
-### Accede al sistema y devuelve un token.
+### Accede al sistema como "EMPRESA" y devuelve un token.
 POST http://localhost:8000/api/v1/login
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
-    "password": "test_password"
+    "email": "comp@test.com",
+    "password": "comp_password"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Accede al sistema como "DESARROLLADOR" y devuelve un token.
+POST http://localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "dev@test.com",
+    "password": "dev_password"
 }
 
 > {% client.global.set("auth_token", response.body.token); %}
