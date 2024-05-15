@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('type')->nullable();
+            $table->string('name')->unique();
+            $table->string('type');
         });
 
         // Insert some production data
@@ -70,8 +70,6 @@ return new class extends Migration
         DB::table('technologies')->insert(['name' => 'Hadoop', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Elasticsearch', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Redis', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
-        DB::table('technologies')->insert(['name' => 'MongoDB', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
-        DB::table('technologies')->insert(['name' => 'PostgreSQL', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Microsoft Azure', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Google Cloud Platform', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Heroku', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
@@ -82,7 +80,6 @@ return new class extends Migration
         DB::table('technologies')->insert(['name' => 'MySQL', 'type' => TechnologyTypeEnum::Databases]);
         DB::table('technologies')->insert(['name' => 'PostgreSQL', 'type' => TechnologyTypeEnum::Databases]);
         DB::table('technologies')->insert(['name' => 'MongoDB', 'type' => TechnologyTypeEnum::Databases]);
-        DB::table('technologies')->insert(['name' => 'Redis', 'type' => TechnologyTypeEnum::Databases]);
         DB::table('technologies')->insert(['name' => 'Oracle', 'type' => TechnologyTypeEnum::Databases]);
         DB::table('technologies')->insert(['name' => 'Microsoft SQL Server', 'type' => TechnologyTypeEnum::Databases]);
         DB::table('technologies')->insert(['name' => 'SQLite', 'type' => TechnologyTypeEnum::Databases]);

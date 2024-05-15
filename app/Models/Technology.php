@@ -19,6 +19,8 @@ class Technology extends Model
         'type',
     ];
 
+    protected $hidden = ['id','pivot'];
+
     protected $casts = [
         'type' => TechnologyTypeEnum::class,
     ];
