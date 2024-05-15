@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Developer;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -32,6 +33,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'img_url' => 'required|string|max:255',
+            'technologies' => 'required|array|min:1',
         ]);
 
         $project = auth()->user()->userable->projects()->create([
@@ -39,6 +41,11 @@ class ProjectController extends Controller
             'description' => $request->description,
             'img_url' => $request->img_url
         ]);
+
+        foreach ($request->technologies as $technology_name) {
+            $technology = Technology::where('name', $technology_name)->firstOrFail();
+            $project->technologies()->attach($technology->id);
+        }
 
         return response()->json(['project' => $project], 201);
     }
@@ -67,6 +74,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'img_url' => 'required|string|max:255',
+            'technologies' => 'required|array|min:1',
         ]);
 
         $user_project->update([
@@ -74,6 +82,13 @@ class ProjectController extends Controller
             'description' => $request->description,
             'img_url' => $request->img_url
         ]);
+
+        $user_project->technologies()->detach();
+
+        foreach ($request->technologies as $technology_name) {
+            $technology = Technology::where('name', $technology_name)->firstOrFail();
+            $user_project->technologies()->attach($technology->id);
+        }
 
         return response()->json(['project' => $user_project], 200);
     }
