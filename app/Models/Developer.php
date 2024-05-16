@@ -50,4 +50,9 @@ class Developer extends Model
         return $this->hasMany(Project::class);
     }
 
+    public function jobMatches(): HasMany
+    {
+        return $this->hasMany(JobMatch::class);
+    }
+
 }
