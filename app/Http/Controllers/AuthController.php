@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use function Laravel\Prompts\password;
 
 //use Illuminate\Validation\Rules;
@@ -51,50 +52,25 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $input_data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            # TODO: Validar password correctamente
-            //'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', Password::defaults()],
             'description' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'avatar' => 'required|string|max:255',
-
+            'avatar' => 'required|url',
             'user_type' => 'required|string|in:empresa,desarrollador',
-            /*
-            'contract_type' => 'required_if:user_type,desarrollador|string|max:255',
-            'work_mode' => 'required_if:user_type,desarrollador|string|max:255',
-            'schedule' => 'required_if:user_type,desarrollador|string|max:255',
-            'specialization' => 'required_if:user_type,desarrollador|string|max:255',
-            */
         ]);
 
         // Crear la empresa o el desarrollador según el tipo de usuario
         if ($request->user_type === 'empresa') {
-            $userable = Company::create([
-            ]);
+            $userable = Company::create();
         } else {
-            $userable = Developer::create([
-                /*
-                'contract_type' => $request->contract_type,
-                'work_mode' => $request->work_mode,
-                'schedule' => $request->schedule,
-                'specialization' => $request->specialization,
-                'github_url' => $request->github_url,
-                */
-            ]);
+            $userable = Developer::create();
         }
 
-        // Crear el usuario
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->description = $request->description;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->avatar = $request->avatar;
+        $user = new User($input_data);
         $user->userable_id = $userable->id;
         $user->userable_type = $userable::class;
         $user->save();
@@ -106,21 +82,23 @@ class AuthController extends Controller
     {
         $user = auth()->user();
 
-        # TODO: Intentar tratar como Patch?
-
-        $request->validate([
+        $input_data = $request->validate([
             'name' => 'string|max:255',
             'description' => 'string|max:255',
             'phone' => 'string|max:255',
             'address' => 'string|max:255',
-            'avatar' => 'string|max:255',
-            'contract_type' => Rule::enum(ContractTypeEnum::class),
-            'work_mode' => Rule::enum(WorkModeEnum::class),
-            'schedule' => Rule::enum(ScheduleEnum::class),
-            'specialization' => Rule::enum(SpecializationEnum::class),
+            'avatar' => 'url',
+            'userable.contract_type' => Rule::enum(ContractTypeEnum::class),
+            'userable.work_mode' => Rule::enum(WorkModeEnum::class),
+            'userable.schedule' => Rule::enum(ScheduleEnum::class),
+            'userable.specialization' => Rule::enum(SpecializationEnum::class),
+            'userable.github_url' => 'url',
         ]);
 
-        $user->update($request->all());
+        $user->update($input_data);
+
+        if($user->userable instanceof Developer && $input_data['userable'])
+            $user->userable->update($input_data['userable']);
 
         return response()->json(['user' => $user], 200);
     }

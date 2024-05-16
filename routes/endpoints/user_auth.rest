@@ -60,8 +60,18 @@ Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
-    "description": "AQUI ESTOY",
-    "movidas": "otras"
+    "name": "Nombre de Usuario Editado",
+    "description": "Descripcion de Usuario Editado",
+    "phone": "546 34 23 65",
+    "address": "La Ruta del Bacalao",
+    "avatar": "https:\/\/via.placeholder.com\/640x480.png\/001199?text=cosas",
+    "userable": {
+        "specialization": "Ciberseguridad",
+        "schedule": "Intensiva Mañana",
+        "work_mode": "Teletrabajo",
+        "contract_type": "Autonomo",
+        "github_url": "https://github.com/lencx/ChatGPT"
+    }
 }
 
 ### Anula el token activo, terminando la sesion del usuario
