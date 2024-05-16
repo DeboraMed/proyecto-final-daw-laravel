@@ -57,10 +57,12 @@ class AuthController extends Controller
             'avatar' => 'required|string|max:255',
 
             'user_type' => 'required|string|in:empresa,desarrollador',
+            /*
             'contract_type' => 'required_if:user_type,desarrollador|string|max:255',
             'work_mode' => 'required_if:user_type,desarrollador|string|max:255',
             'schedule' => 'required_if:user_type,desarrollador|string|max:255',
             'specialization' => 'required_if:user_type,desarrollador|string|max:255',
+            */
         ]);
 
         // Crear la empresa o el desarrollador según el tipo de usuario
@@ -69,11 +71,13 @@ class AuthController extends Controller
             ]);
         } else {
             $userable = Developer::create([
+                /*
                 'contract_type' => $request->contract_type,
                 'work_mode' => $request->work_mode,
                 'schedule' => $request->schedule,
                 'specialization' => $request->specialization,
                 'github_url' => $request->github_url,
+                */
             ]);
         }
 

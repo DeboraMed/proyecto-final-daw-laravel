@@ -25,12 +25,7 @@ Content-Type: application/json
     "description": "Mi Descripcion",
     "phone": "456 34 23 43",
     "address": "Mi Direccion de Desarrollador",
-    "avatar": "http://cosas_dev.jpg",
-    "contract_type": "Indefinido",
-    "work_mode": "Hibrido",
-    "schedule": "Completa",
-    "specialization": "Administrador de Sistemas",
-    "github_url": "http://github/mio"
+    "avatar": "http://cosas_dev.jpg"
 }
 
 ### Accede al sistema como "EMPRESA" y devuelve un token.
