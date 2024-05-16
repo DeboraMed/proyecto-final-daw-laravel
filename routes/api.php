@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EnumController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProjectController;
@@ -35,4 +36,5 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'v1', 'namespace' =>
 
     Route::apiResource('projects', ProjectController::class);
     Route::apiResource('experiences', ExperienceController::class);
+    Route::apiResource('education', EducationController::class);
 });

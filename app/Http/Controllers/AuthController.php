@@ -96,4 +96,6 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Usuario registrado correctamente'], 201);
     }
+
+    # TODO: Falta incluir modificar las preferencias del usuario
 }

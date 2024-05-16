@@ -41,8 +41,6 @@ class ExperienceController extends Controller
             'technologies.*.name' => 'required|string|max:255',
         ]);
 
-        # TODO: Escribiendo controladores. Ahora toca creacion de Experiences. Ver las validaciones.
-
         $experience = auth()->user()->userable->experiences()->create([
             'company_name' => $request->company_name,
             'description' => $request->description,
@@ -95,7 +93,6 @@ class ExperienceController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'level' => $request->level
-
         ]);
 
         $user_experience->technologies()->detach();

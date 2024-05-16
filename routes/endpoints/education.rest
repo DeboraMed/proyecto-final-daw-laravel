@@ -1,0 +1,48 @@
+### Accede al sistema como "DESARROLLADOR" y devuelve un token.
+POST http://localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "dev@test.com",
+    "password": "dev_password"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Obtener la formacion del usuario activo
+GET http://localhost:8000/api/v1/education
+Authorization: Bearer {{auth_token}}
+
+### Crear una formacion, asociada al usuario activo
+POST http://localhost:8000/api/v1/education
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+    "institution": "Mi Instituto",
+    "qualification": "Grado Superior en Desarrollo de Aplicaciones Web",
+    "academic_level": "FP2 Grado Superior",
+    "completion_date": "2024-05-01"
+}
+
+> {% client.global.set("education_id", response.body.education.id); %}
+
+### Mostrar una formacion del usuario activo
+GET http://localhost:8000/api/v1/education/{{education_id}}
+Authorization: Bearer {{auth_token}}
+
+### Edita una formacion del usuario activo (PUT/PATCH)
+PUT http://localhost:8000/api/v1/education/{{education_id}}
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+    "institution": "Mi Instituto Editado",
+    "qualification": "Grado Superior en Desarrollo de Aplicaciones Web (Editado)",
+    "academic_level": "Postgrado",
+    "completion_date": "2024-06-01"
+}
+
+### Borrar una formacion del usuario activo
+DELETE http://localhost:8000/api/v1/education/{{education_id}}
+Authorization: Bearer {{auth_token}}
