@@ -1,0 +1,60 @@
+### Accede al sistema como "EMPRESA" y devuelve un token.
+POST http://localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "comp@test.com",
+    "password": "comp_password"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Obtener las experiencias del usuario activo
+GET http://localhost:8000/api/v1/vacancies
+Authorization: Bearer {{auth_token}}
+
+### Crear una experiencia, asociada al usuario activo
+POST http://localhost:8000/api/v1/vacancies
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+    "title": "Mi nueva vacante",
+    "description": "Una nueva oportunidad en una empresa emergente",
+    "contract_type": "Indefinido",
+    "work_mode": "Presencial",
+    "schedule": "Intensiva Mañana",
+    "date": "2019-11-06",
+    "technologies": [
+        {"name": "JavaScript"},
+        {"name": "Vue"}
+    ]
+}
+
+> {% client.global.set("vacancy_id", response.body.vacancy.id); %}
+
+### Mostrar una experiencia del usuario activo
+GET http://localhost:8000/api/v1/vacancies/{{vacancy_id}}
+Authorization: Bearer {{auth_token}}
+
+### Edita una experiencia del usuario activo (PUT/PATCH)
+PUT http://localhost:8000/api/v1/vacancies/{{vacancy_id}}
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+    "title": "Mi nueva vacante editada",
+    "description": "Una nueva oportunidad en una empresa no tan emergente",
+    "contract_type": "Temporal",
+    "work_mode": "Hibrido",
+    "schedule": "Completa",
+    "date": "2024-11-06",
+    "technologies": [
+        {"name": "Kubernetes"},
+        {"name": "MariaDB"}
+    ]
+}
+
+### Borrar una experiencia del usuario activo
+DELETE http://localhost:8000/api/v1/vacancies/{{vacancy_id}}
+Authorization: Bearer {{auth_token}}
