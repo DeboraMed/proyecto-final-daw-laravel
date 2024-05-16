@@ -32,7 +32,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'img_url' => 'required|string|max:255',
+            'img_url' => 'required|url',
             'technologies' => 'required|array|min:1',
             'technologies.*.name' => 'required|string|max:255',
         ]);
@@ -74,7 +74,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'img_url' => 'required|string|max:255',
+            'img_url' => 'required|url',
             'technologies' => 'required|array|min:1',
             'technologies.*.name' => 'required|string|max:255',
         ]);
