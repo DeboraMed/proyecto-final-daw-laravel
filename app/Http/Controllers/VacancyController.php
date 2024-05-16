@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AcademicLevelEnum;
 use App\Enums\ContractTypeEnum;
 use App\Enums\ExperienceLevelEnum;
 use App\Enums\ScheduleEnum;
@@ -43,6 +44,7 @@ class VacancyController extends Controller
             'contract_type' => ['required', Rule::enum(ContractTypeEnum::class)],
             'work_mode' => ['required', Rule::enum(WorkModeEnum::class)],
             'schedule' => ['required', Rule::enum(ScheduleEnum::class)],
+            'academic_level' => ['required', Rule::enum(AcademicLevelEnum::class)],
             'technologies' => 'required|array|min:1',
             'technologies.*.name' => 'required|string|max:255',
         ]);
@@ -54,6 +56,7 @@ class VacancyController extends Controller
             'contract_type' => $request->contract_type,
             'work_mode' => $request->work_mode,
             'schedule' => $request->schedule,
+            'academic_level' => $request->academic_level,
         ]);
 
         foreach ($request->technologies as $technology_name) {
@@ -91,6 +94,7 @@ class VacancyController extends Controller
             'contract_type' => ['required', Rule::enum(ContractTypeEnum::class)],
             'work_mode' => ['required', Rule::enum(WorkModeEnum::class)],
             'schedule' => ['required', Rule::enum(ScheduleEnum::class)],
+            'academic_level' => ['required', Rule::enum(AcademicLevelEnum::class)],
             'technologies' => 'required|array|min:1',
             'technologies.*.name' => 'required|string|max:255',
         ]);
@@ -102,6 +106,7 @@ class VacancyController extends Controller
             'contract_type' => $request->contract_type,
             'work_mode' => $request->work_mode,
             'schedule' => $request->schedule,
+            'academic_level' => $request->academic_level,
         ]);
 
         $user_vacancy->technologies()->detach();

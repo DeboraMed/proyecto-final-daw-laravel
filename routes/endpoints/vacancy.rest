@@ -24,6 +24,7 @@ Content-Type: application/json
     "contract_type": "Indefinido",
     "work_mode": "Presencial",
     "schedule": "Intensiva Mañana",
+    "academic_level": "Diplomado",
     "date": "2019-11-06",
     "technologies": [
         {"name": "JavaScript"},
@@ -48,6 +49,7 @@ Content-Type: application/json
     "contract_type": "Temporal",
     "work_mode": "Hibrido",
     "schedule": "Completa",
+    "academic_level": "Postgrado",
     "date": "2024-11-06",
     "technologies": [
         {"name": "Kubernetes"},

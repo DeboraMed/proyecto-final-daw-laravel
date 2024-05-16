@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\AcademicLevelEnum;
 use App\Enums\ContractTypeEnum;
 use App\Enums\ScheduleEnum;
 use App\Enums\WorkModeEnum;
@@ -26,6 +27,7 @@ class VacancyFactory extends Factory
             'contract_type' => fake()->randomElement(ContractTypeEnum::cases())->value,
             'work_mode' => fake()->randomElement(WorkModeEnum::cases())->value,
             'schedule' => fake()->randomElement(ScheduleEnum::cases())->value,
+            'academic_level' => fake()->randomElement(AcademicLevelEnum::cases())->value,
         ];
     }
 }

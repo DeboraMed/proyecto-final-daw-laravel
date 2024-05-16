@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('contract_type')->nullable();
             $table->string('work_mode')->nullable();
             $table->string('schedule')->nullable();
+            $table->string('academic_level')->nullable();
             $table->date('date')->nullable();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
 
