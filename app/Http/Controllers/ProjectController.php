@@ -34,6 +34,7 @@ class ProjectController extends Controller
             'description' => 'required|string|max:255',
             'img_url' => 'required|string|max:255',
             'technologies' => 'required|array|min:1',
+            'technologies.*.name' => 'required|string|max:255',
         ]);
 
         $project = auth()->user()->userable->projects()->create([
@@ -43,7 +44,7 @@ class ProjectController extends Controller
         ]);
 
         foreach ($request->technologies as $technology_name) {
-            $technology = Technology::where('name', $technology_name)->firstOrFail();
+            $technology = Technology::where('name', $technology_name['name'])->firstOrFail();
             $project->technologies()->attach($technology->id);
         }
 
@@ -75,6 +76,7 @@ class ProjectController extends Controller
             'description' => 'required|string|max:255',
             'img_url' => 'required|string|max:255',
             'technologies' => 'required|array|min:1',
+            'technologies.*.name' => 'required|string|max:255',
         ]);
 
         $user_project->update([
@@ -86,7 +88,7 @@ class ProjectController extends Controller
         $user_project->technologies()->detach();
 
         foreach ($request->technologies as $technology_name) {
-            $technology = Technology::where('name', $technology_name)->firstOrFail();
+            $technology = Technology::where('name', $technology_name['name'])->firstOrFail();
             $user_project->technologies()->attach($technology->id);
         }
 

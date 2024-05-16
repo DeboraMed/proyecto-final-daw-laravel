@@ -22,7 +22,12 @@ Content-Type: application/json
     "title": "Nuevo Proyecto",
     "description": "Mi descripcion de Proyecto",
     "img_url": "http://mi.url/imagen.jpg",
-    "technologies": ["JavaScript", "Vue", "Docker", "MySQL"]
+    "technologies": [
+        {"name": "JavaScript"},
+        {"name": "Vue"},
+        {"name": "Docker"},
+        {"name": "MySQL"}
+    ]
 }
 
 > {% client.global.set("project_id", response.body.project.id); %}
@@ -40,7 +45,12 @@ Content-Type: application/json
     "title": "Nuevo Proyecto Editado",
     "description": "Mi descripcion de Proyecto Editado",
     "img_url": "http://mi.url/imagen_editado.jpg",
-    "technologies": ["Python", "Flask (Python framework)", "Kubernetes", "MariaDB"]
+    "technologies": [
+        {"name": "Python"},
+        {"name": "Flask (Python framework)"},
+        {"name": "Kubernetes"},
+        {"name": "MariaDB"}
+    ]
 }
 
 ### Borrar un proyecto del usuario activo
