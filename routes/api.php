@@ -33,6 +33,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('user', [AuthController::class, 'user']);
+    Route::put('user', [AuthController::class, 'update']);
     Route::get('logout', [AuthController::class, 'logout']);
 
     Route::apiResource('projects', ProjectController::class);

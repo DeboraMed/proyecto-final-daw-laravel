@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ContractTypeEnum;
+use App\Enums\ScheduleEnum;
+use App\Enums\SpecializationEnum;
+use App\Enums\WorkModeEnum;
 use App\Models\Company;
 use App\Models\Developer;
 use Illuminate\Auth\Events\Login;
@@ -10,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use function Laravel\Prompts\password;
 
 //use Illuminate\Validation\Rules;
@@ -23,7 +28,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = $user->createToken('my_token');
-            return ['token' => $token->plainTextToken];
+            return ['token' => $token->plainTextToken, 'user_type' => ($user->userable instanceof Developer) ? 'developer' : 'company'];
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -97,5 +102,26 @@ class AuthController extends Controller
         return response()->json(['message' => 'Usuario registrado correctamente'], 201);
     }
 
-    # TODO: Falta incluir modificar las preferencias del usuario
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        # TODO: Intentar tratar como Patch?
+
+        $request->validate([
+            'name' => 'string|max:255',
+            'description' => 'string|max:255',
+            'phone' => 'string|max:255',
+            'address' => 'string|max:255',
+            'avatar' => 'string|max:255',
+            'contract_type' => Rule::enum(ContractTypeEnum::class),
+            'work_mode' => Rule::enum(WorkModeEnum::class),
+            'schedule' => Rule::enum(ScheduleEnum::class),
+            'specialization' => Rule::enum(SpecializationEnum::class),
+        ]);
+
+        $user->update($request->all());
+
+        return response()->json(['user' => $user], 200);
+    }
 }

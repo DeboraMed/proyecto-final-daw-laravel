@@ -9,11 +9,11 @@ Content-Type: application/json
 
 > {% client.global.set("auth_token", response.body.token); %}
 
-### Obtener las experiencias del usuario activo
+### Obtener las vacantes del usuario activo
 GET http://localhost:8000/api/v1/vacancies
 Authorization: Bearer {{auth_token}}
 
-### Crear una experiencia, asociada al usuario activo
+### Crear una vacante, asociada al usuario activo
 POST http://localhost:8000/api/v1/vacancies
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
@@ -33,11 +33,11 @@ Content-Type: application/json
 
 > {% client.global.set("vacancy_id", response.body.vacancy.id); %}
 
-### Mostrar una experiencia del usuario activo
+### Mostrar una vacante del usuario activo
 GET http://localhost:8000/api/v1/vacancies/{{vacancy_id}}
 Authorization: Bearer {{auth_token}}
 
-### Edita una experiencia del usuario activo (PUT/PATCH)
+### Edita una vacante del usuario activo (PUT/PATCH)
 PUT http://localhost:8000/api/v1/vacancies/{{vacancy_id}}
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
@@ -55,6 +55,6 @@ Content-Type: application/json
     ]
 }
 
-### Borrar una experiencia del usuario activo
+### Borrar una vacante del usuario activo
 DELETE http://localhost:8000/api/v1/vacancies/{{vacancy_id}}
 Authorization: Bearer {{auth_token}}

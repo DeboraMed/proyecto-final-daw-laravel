@@ -54,6 +54,15 @@ Content-Type: application/json
 GET http://localhost:8000/api/v1/user
 Authorization: Bearer {{auth_token}}
 
+### Edita el perfil del usuario activo actual
+PUT http://localhost:8000/api/v1/user
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+    "description": "AQUI ESTOY",
+    "movidas": "otras"
+}
 
 ### Anula el token activo, terminando la sesion del usuario
 GET http://localhost:8000/api/v1/logout
