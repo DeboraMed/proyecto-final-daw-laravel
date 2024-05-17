@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AcademicLevelEnum;
 use App\Models\Developer;
 use App\Models\JobMatch;
 use App\Models\Vacancy;
@@ -28,7 +29,7 @@ class JobMatchController extends Controller
         foreach ($developers as $developer) {
             foreach ($vacancies as $vacancy) {
                 $jobMatch = self::calculateMatchScore($developer, $vacancy);
-                if ($jobMatch->score > 50) { // Umbral de coincidencia del 80%
+                if ($jobMatch!=null && $jobMatch->score > 50) { // Umbral de coincidencia del 80%
                     $jobMatch->save();
                 }
             }
@@ -37,9 +38,12 @@ class JobMatchController extends Controller
         return response()->json(['message' => 'Matchmaking realizado correctamente'], 200);
     }
 
-    private static function calculateMatchScore($developer, $vacancy) {
+    private static function calculateMatchScore($developer, $vacancy): ?JobMatch {
         // Implementa la lógica para calcular la coincidencia
         $score = 0;
+
+        if(!self::checkRequiredAcademicLevel($developer, $vacancy))
+            return null;
 
         if($developer->contract_type == $vacancy->contract_type)
             $score+=40;
@@ -65,5 +69,57 @@ class JobMatchController extends Controller
         */
         // Puedes agregar más criterios como ubicación, tipo de empleo, etc.
         return $jobMatch;
+    }
+
+    private static function checkRequiredAcademicLevel($developer, $vacancy):bool
+    {
+        foreach ($developer->education()->get() as $education) {
+
+            if($vacancy->academic_level == $education->academic_level)
+                return true;
+
+            if($vacancy->academic_level == AcademicLevelEnum::Primaria)
+                return true;
+
+            if($vacancy->academic_level == AcademicLevelEnum::Secundaria) {
+                if ($education->academic_level == AcademicLevelEnum::Bachillerato ||
+                    $education->academic_level == AcademicLevelEnum::FP1 ||
+                    $education->academic_level == AcademicLevelEnum::FP2 ||
+                    $education->academic_level == AcademicLevelEnum::Grado ||
+                    $education->academic_level == AcademicLevelEnum::Master ||
+                    $education->academic_level == AcademicLevelEnum::Doctorado
+                )
+                    return true;
+            }
+
+            if($vacancy->academic_level == AcademicLevelEnum::Bachillerato) {
+                if ($education->academic_level == AcademicLevelEnum::FP1 ||
+                    $education->academic_level == AcademicLevelEnum::FP2 ||
+                    $education->academic_level == AcademicLevelEnum::Grado ||
+                    $education->academic_level == AcademicLevelEnum::Master ||
+                    $education->academic_level == AcademicLevelEnum::Doctorado
+                )
+                    return true;
+            }
+
+            if($vacancy->academic_level == AcademicLevelEnum::FP1) {
+                if ($education->academic_level == AcademicLevelEnum::FP2)
+                    return true;
+            }
+
+            if($vacancy->academic_level == AcademicLevelEnum::Grado) {
+                if ($education->academic_level == AcademicLevelEnum::Master ||
+                    $education->academic_level == AcademicLevelEnum::Doctorado
+                )
+                    return true;
+            }
+
+            if($vacancy->academic_level == AcademicLevelEnum::Master) {
+                if ($education->academic_level == AcademicLevelEnum::Doctorado)
+                    return true;
+            }
+
+        }
+        return false;
     }
 }
