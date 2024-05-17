@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\JobMatchController;
 use App\Models\Company;
 use App\Models\Developer;
 use App\Models\Education;
@@ -67,5 +68,7 @@ class DatabaseSeeder extends Seeder
         $user->email = 'comp@test.com';
         $user->password = Hash::make('comp_password');
         $user->save();
+
+        JobMatchController::refreshMatches();
     }
 }

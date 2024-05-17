@@ -19,7 +19,7 @@ class JobMatchController extends Controller
         return response()->json(['job_match' => $jobMatches], 200);
     }
 
-    public function refreshMatches() {
+    static public function refreshMatches() {
         $developers = Developer::all();
         $vacancies = Vacancy::all();
         #TODO: Intentar actualizar solo los cambios.
@@ -27,7 +27,7 @@ class JobMatchController extends Controller
 
         foreach ($developers as $developer) {
             foreach ($vacancies as $vacancy) {
-                $jobMatch = $this->calculateMatchScore($developer, $vacancy);
+                $jobMatch = self::calculateMatchScore($developer, $vacancy);
                 if ($jobMatch->score > 50) { // Umbral de coincidencia del 80%
                     $jobMatch->save();
                 }
@@ -37,7 +37,7 @@ class JobMatchController extends Controller
         return response()->json(['message' => 'Matchmaking realizado correctamente'], 200);
     }
 
-    private function calculateMatchScore($developer, $vacancy) {
+    private static function calculateMatchScore($developer, $vacancy) {
         // Implementa la lógica para calcular la coincidencia
         $score = 0;
 
