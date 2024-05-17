@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EnumController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\JobMatchController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\VacancyController;
@@ -35,6 +36,9 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'v1', 'namespace' =>
     Route::get('user', [AuthController::class, 'user']);
     Route::put('user', [AuthController::class, 'update']);
     Route::get('logout', [AuthController::class, 'logout']);
+
+    Route::get('job-matches', [JobMatchController::class, 'index']);
+    Route::post('job-matches/refresh', [JobMatchController::class, 'refreshMatches']);
 
     Route::apiResource('projects', ProjectController::class);
     Route::apiResource('experiences', ExperienceController::class);
