@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         Vacancy::all()->each(
             function ($vacancy) use ($technologies) {
                 $vacancy->technologies()->attach(
-                    $technologies->random(2)->pluck('id')->toArray()
+                    $technologies->random(3)->pluck('id')->toArray()
                 );
             });
 

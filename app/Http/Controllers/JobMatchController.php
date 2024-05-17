@@ -16,7 +16,7 @@ class JobMatchController extends Controller
         if(!$developer instanceof Developer)
             return response()->json(['message' => 'El usuario no es un desarrollador'], 403);
 
-        $jobMatches = $developer->jobMatches()->with('vacancy')->get();
+        $jobMatches = $developer->jobMatches()->with('vacancy')->orderBy('score','DESC')->get();
         return response()->json(['job_match' => $jobMatches], 200);
     }
 
@@ -29,7 +29,7 @@ class JobMatchController extends Controller
         foreach ($developers as $developer) {
             foreach ($vacancies as $vacancy) {
                 $jobMatch = self::calculateMatchScore($developer, $vacancy);
-                if ($jobMatch!=null && $jobMatch->score > 50) { // Umbral de coincidencia del 80%
+                if ($jobMatch!=null && $jobMatch->score > 50) { // Umbral de coincidencia supera el 50%
                     $jobMatch->save();
                 }
             }
@@ -41,34 +41,56 @@ class JobMatchController extends Controller
     private static function calculateMatchScore($developer, $vacancy): ?JobMatch {
         // Implementa la lógica para calcular la coincidencia
         $score = 0;
+        $notes = '';
 
         if(!self::checkRequiredAcademicLevel($developer, $vacancy))
             return null;
 
-        if($developer->contract_type == $vacancy->contract_type)
-            $score+=40;
-        if($developer->work_mode == $vacancy->work_mode)
-            $score+=30;
-        if($developer->schedule == $vacancy->schedule)
-            $score+=30;
+        if($developer->contract_type == $vacancy->contract_type) {
+            $score += 10;
+            $notes = $developer->contract_type;
+        }
+        if($developer->schedule == $vacancy->schedule) {
+            $score += 10;
+            $notes = $developer->schedule;
+        }
+        if($developer->work_mode == $vacancy->work_mode) {
+            $score += 20;
+            $notes = $developer->work_mode;
+        }
+
+        $matchedSkills = self::matchSkills($developer, $vacancy);
+        $score += $matchedSkills * 60;
+
+        if($matchedSkills == 1)
+            $notes = 'Dominas los requisitos';
+
+        if($score == 100)
+            $notes = '¡Perfecto!';
 
         $jobMatch = new JobMatch([
             'developer_id' => $developer->id,
             'vacancy_id' => $vacancy->id,
             'score' => $score,
-            'notes' => 'Emparejamiento OK',
+            'notes' => $notes,
         ]);
 
-        /*
-        // Ejemplo básico de comparación de habilidades
-        $developerSkills = json_decode($developer->skills);
-        $requiredSkills = json_decode($job->required_skills);
+        return $jobMatch;
+    }
+
+    private static function matchSkills($developer, $vacancy): float
+    {
+        $developerProjectsTechnologies = $developer->projects()->with('technologies')->get()
+            ->pluck('technologies.*.name')->flatten()->unique();
+        $developerExperiencesTechnologies = $developer->experiences()->with('technologies')->get()
+            ->pluck('technologies.*.name')->flatten()->unique();
+        $developerSkills = $developerProjectsTechnologies->merge($developerExperiencesTechnologies)->unique()->toArray();
+
+        $requiredSkills = $vacancy->technologies()->pluck('name')->unique()->toArray();
 
         $commonSkills = array_intersect($developerSkills, $requiredSkills);
-        $score = count($commonSkills) / count($requiredSkills);
-        */
-        // Puedes agregar más criterios como ubicación, tipo de empleo, etc.
-        return $jobMatch;
+
+        return (count($commonSkills) / count($requiredSkills));
     }
 
     private static function checkRequiredAcademicLevel($developer, $vacancy):bool
