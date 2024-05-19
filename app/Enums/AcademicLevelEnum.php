@@ -12,4 +12,5 @@ enum AcademicLevelEnum: string
     case Grado = 'Grado Universitario';
     case Master = 'Máster Universitario';
     case Doctorado = 'Doctorado';
+    case Certificacion = 'Certificación';
 }

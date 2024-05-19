@@ -16,7 +16,7 @@ class JobMatchController extends Controller
         if(!$developer instanceof Developer)
             return response()->json(['message' => 'El usuario no es un desarrollador'], 403);
 
-        $jobMatches = $developer->jobMatches()->with('vacancy')->orderBy('score','DESC')->get();
+        $jobMatches = $developer->jobMatches()->with('vacancy.company.user')->orderBy('score','DESC')->get();
         return response()->json(['job_match' => $jobMatches], 200);
     }
 
