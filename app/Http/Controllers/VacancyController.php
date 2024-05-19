@@ -31,6 +31,12 @@ class VacancyController extends Controller
         return response()->json(['vacancies' => $vacancies], 200);
     }
 
+    public function index_all()
+    {
+        //
+        return response()->json(['vacancies' => Vacancy::with('company.user', 'technologies')->get()], 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

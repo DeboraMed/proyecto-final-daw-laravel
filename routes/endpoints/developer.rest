@@ -1,0 +1,14 @@
+### Accede al sistema como "EMPRESA" y devuelve un token.
+POST http://localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "comp@test.com",
+    "password": "comp_password"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Obtener todos los desarrolladores del sistema
+GET http://localhost:8000/api/v1/developer/all
+Authorization: Bearer {{auth_token}}

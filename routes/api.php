@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EnumController;
 use App\Http\Controllers\ExperienceController;
@@ -44,4 +45,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'v1', 'namespace' =>
     Route::apiResource('experiences', ExperienceController::class);
     Route::apiResource('education', EducationController::class);
     Route::apiResource('vacancies', VacancyController::class);
+
+    Route::get('developer/all', [DeveloperController::class, 'index']);
+    Route::get('vacancies/all', [VacancyController::class, 'index_all']);
 });

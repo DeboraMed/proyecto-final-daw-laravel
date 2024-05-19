@@ -13,6 +13,10 @@ Content-Type: application/json
 GET http://localhost:8000/api/v1/vacancies
 Authorization: Bearer {{auth_token}}
 
+### Obtener todas vacantes del sistema
+GET http://localhost:8000/api/v1/vacancies/all
+Authorization: Bearer {{auth_token}}
+
 ### Crear una vacante, asociada al usuario activo
 POST http://localhost:8000/api/v1/vacancies
 Authorization: Bearer {{auth_token}}
