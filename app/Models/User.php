@@ -35,6 +35,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'avatar',
     ];
 
     /**
@@ -54,4 +55,10 @@ class User extends Authenticatable
     {
         return $this->morphTo();
     }
+
+    public function getAvatarUrlAttribute() {
+        return $this->avatar ? asset('storage/' . $this->avatar) : null;
+    }
+
+    protected $appends = ['avatar_url'];
 }

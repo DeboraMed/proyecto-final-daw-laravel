@@ -6,6 +6,7 @@ use App\Models\Developer;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -30,20 +31,27 @@ class ProjectController extends Controller
     {
         //
         $request->validate([
+            'img_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'project_data' => 'required|json'
+        ]);
+
+        $projectData = json_decode($request->input('project_data'), true);
+
+        $input_data = validator($projectData, [
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'img_url' => 'required|url',
             'technologies' => 'required|array|min:1',
             'technologies.*.name' => 'required|string|max:255',
-        ]);
+        ])->validate();
 
-        $project = auth()->user()->userable->projects()->create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'img_url' => $request->img_url
-        ]);
+        $image = $request->file('img_url');
 
-        foreach ($request->technologies as $technology_name) {
+        $imagePath = Storage::disk('public')->put('storage', $image);
+        $input_data['img_url'] = basename($imagePath);
+
+        $project = auth()->user()->userable->projects()->create($input_data);
+
+        foreach ($input_data['technologies'] as $technology_name) {
             $technology = Technology::where('name', $technology_name['name'])->firstOrFail();
             $project->technologies()->attach($technology->id);
         }
@@ -74,7 +82,6 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'img_url' => 'required|url',
             'technologies' => 'required|array|min:1',
             'technologies.*.name' => 'required|string|max:255',
         ]);
@@ -82,7 +89,6 @@ class ProjectController extends Controller
         $user_project->update([
             'title' => $request->title,
             'description' => $request->description,
-            'img_url' => $request->img_url
         ]);
 
         $user_project->technologies()->detach();

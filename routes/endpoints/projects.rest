@@ -16,12 +16,20 @@ Authorization: Bearer {{auth_token}}
 ### Crear un proyecto, asociado al usuario activo
 POST http://localhost:8000/api/v1/projects
 Authorization: Bearer {{auth_token}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="img_url"; filename="project.png"
+Content-Type: image/png
+
+< ./img/project.png
+--boundary
+Content-Disposition: form-data; name="project_data"
 Content-Type: application/json
 
 {
     "title": "Nuevo Proyecto",
     "description": "Mi descripcion de Proyecto",
-    "img_url": "http://mi.url/imagen.jpg",
     "technologies": [
         {"name": "JavaScript"},
         {"name": "Vue"},
@@ -29,6 +37,7 @@ Content-Type: application/json
         {"name": "MySQL"}
     ]
 }
+--boundary--
 
 > {% client.global.set("project_id", response.body.project.id); %}
 
@@ -44,7 +53,6 @@ Content-Type: application/json
 {
     "title": "Nuevo Proyecto Editado",
     "description": "Mi descripcion de Proyecto Editado",
-    "img_url": "http://mi.url/imagen_editado.jpg",
     "technologies": [
         {"name": "Python"},
         {"name": "Flask (Python framework)"},

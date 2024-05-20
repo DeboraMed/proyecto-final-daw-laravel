@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use function Laravel\Prompts\password;
@@ -52,6 +53,8 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        # TODO: Considerar actualizar el avatar en un endpoint aparte
+
         $input_data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
@@ -59,7 +62,7 @@ class AuthController extends Controller
             'description' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'avatar' => 'required|url',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'user_type' => 'required|string|in:empresa,desarrollador',
         ]);
 
@@ -69,6 +72,10 @@ class AuthController extends Controller
         } else {
             $userable = Developer::create();
         }
+
+        $image = $request->file('avatar');
+        $imagePath = Storage::disk('public')->put('storage', $image);
+        $input_data['avatar'] = basename($imagePath);
 
         $user = new User($input_data);
         $user->userable_id = $userable->id;
@@ -87,7 +94,6 @@ class AuthController extends Controller
             'description' => 'string|max:255',
             'phone' => 'string|max:255',
             'address' => 'string|max:255',
-            'avatar' => 'url',
             'userable.contract_type' => Rule::enum(ContractTypeEnum::class),
             'userable.work_mode' => Rule::enum(WorkModeEnum::class),
             'userable.schedule' => Rule::enum(ScheduleEnum::class),

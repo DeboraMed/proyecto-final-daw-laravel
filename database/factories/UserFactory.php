@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Developer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -41,7 +42,7 @@ class UserFactory extends Factory
             'description' => fake()->paragraph(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'avatar' => fake()->imageUrl(),
+            'avatar' => fake()->image('public/storage', 50, 50, 'user', false),
             'userable_type' => $randomUserType,
             'userable_id' => $userable->id,
         ];

@@ -22,6 +22,10 @@ class Project extends Model
         'img_url',
     ];
 
+    protected $hidden = [
+        'img_url',
+    ];
+
     public function developer(): BelongsTo
     {
         return $this->belongsTo(Developer::class);
@@ -31,4 +35,10 @@ class Project extends Model
     {
         return $this->belongsToMany(Technology::class);
     }
+
+    public function getImageUrlAttribute() {
+        return $this->img_url ? asset('storage/' . $this->img_url) : null;
+    }
+
+    protected $appends = ['image_url'];
 }

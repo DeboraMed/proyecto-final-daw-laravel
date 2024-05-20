@@ -19,7 +19,7 @@ class ProjectFactory extends Factory
         return [
             'title' => fake()->paragraph(),
             'description' => fake()->paragraph(),
-            'img_url' => fake()->imageUrl(),
+            'img_url' => fake()->image('public/storage', 50, 50, 'project', false),
         ];
     }
 }

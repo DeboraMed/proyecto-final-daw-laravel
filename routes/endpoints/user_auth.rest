@@ -1,32 +1,94 @@
 ### Registra un nuevo usuario de tipo Empresa.
 POST http://localhost:8000/api/v1/register
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary=boundary
 
-{
-    "name": "Nueva Empresa",
-    "email": "nuevo@empresa.com",
-    "password": "mi_contraseña_segura",
-    "user_type": "empresa",
-    "description": "Mi Descripcion",
-    "phone": "762 812 345",
-    "address": "Mi Direccion de Empresa",
-    "avatar": "http://cosas.jpg"
-}
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="company.png"
+Content-Type: image/png
+
+< ./img/company.png
+--boundary
+Content-Disposition: form-data; name="name"
+Content-Type: text/plain
+
+Nueva Empresa
+--boundary
+Content-Disposition: form-data; name="email"
+Content-Type: text/plain
+
+nuevo@empresa.com
+--boundary
+Content-Disposition: form-data; name="password"
+Content-Type: text/plain
+
+mi_contraseña_segura
+--boundary
+Content-Disposition: form-data; name="user_type"
+Content-Type: text/plain
+
+empresa
+--boundary
+Content-Disposition: form-data; name="description"
+Content-Type: text/plain
+
+Mi Descripcion
+--boundary
+Content-Disposition: form-data; name="phone"
+Content-Type: text/plain
+
+762 812 345
+--boundary
+Content-Disposition: form-data; name="address"
+Content-Type: text/plain
+
+Mi Direccion de Empresa
+--boundary--
 
 ### Registra un nuevo usuario de tipo Desarrollador.
 POST http://localhost:8000/api/v1/register
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary=boundary
 
-{
-    "name": "Nuevo Desarrollador",
-    "email": "nuevo@desarrollador.com",
-    "password": "mi_contraseña_segura",
-    "user_type": "desarrollador",
-    "description": "Mi Descripcion",
-    "phone": "456 34 23 43",
-    "address": "Mi Direccion de Desarrollador",
-    "avatar": "http://cosas_dev.jpg"
-}
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="developer.png"
+Content-Type: image/png
+
+< ./img/developer.png
+--boundary
+Content-Disposition: form-data; name="name"
+Content-Type: text/plain
+
+Nuevo Desarrollador
+--boundary
+Content-Disposition: form-data; name="email"
+Content-Type: text/plain
+
+nuevo@desarrollador.com
+--boundary
+Content-Disposition: form-data; name="password"
+Content-Type: text/plain
+
+mi_contraseña_segura
+--boundary
+Content-Disposition: form-data; name="user_type"
+Content-Type: text/plain
+
+desarrollador
+--boundary
+Content-Disposition: form-data; name="description"
+Content-Type: text/plain
+
+Mi Descripcion
+--boundary
+Content-Disposition: form-data; name="phone"
+Content-Type: text/plain
+
+456 34 23 43
+--boundary
+Content-Disposition: form-data; name="address"
+Content-Type: text/plain
+
+Mi Direccion de Desarrollador
+--boundary--
 
 ### Accede al sistema como "EMPRESA" y devuelve un token.
 POST http://localhost:8000/api/v1/login
@@ -44,8 +106,8 @@ POST http://localhost:8000/api/v1/login
 Content-Type: application/json
 
 {
-    "email": "dev@test.com",
-    "password": "dev_password"
+    "email": "nuevo11@desarrollador.com",
+    "password": "mi_contraseña_segura"
 }
 
 > {% client.global.set("auth_token", response.body.token); %}
@@ -64,7 +126,6 @@ Content-Type: application/json
     "description": "Descripcion de Usuario Editado",
     "phone": "546 34 23 65",
     "address": "La Ruta del Bacalao",
-    "avatar": "https:\/\/via.placeholder.com\/640x480.png\/001199?text=cosas",
     "userable": {
         "specialization": "Ciberseguridad",
         "schedule": "Intensiva Mañana",
