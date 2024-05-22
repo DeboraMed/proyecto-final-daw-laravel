@@ -40,22 +40,22 @@ return new class extends Migration
         DB::table('technologies')->insert(['name' => 'Haskell', 'type' => TechnologyTypeEnum::Programming_Languages]);
         DB::table('technologies')->insert(['name' => 'Lua', 'type' => TechnologyTypeEnum::Programming_Languages]);
 
-        DB::table('technologies')->insert(['name' => 'Spring Boot (Java framework)', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Spring Boot', 'type' => TechnologyTypeEnum::Frameworks]);
         DB::table('technologies')->insert(['name' => 'Angular', 'type' => TechnologyTypeEnum::Frameworks]);
         DB::table('technologies')->insert(['name' => 'React', 'type' => TechnologyTypeEnum::Frameworks]);
         DB::table('technologies')->insert(['name' => 'Vue', 'type' => TechnologyTypeEnum::Frameworks]);
         DB::table('technologies')->insert(['name' => 'Flutter', 'type' => TechnologyTypeEnum::Frameworks]);
         DB::table('technologies')->insert(['name' => 'WordPress', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'Django (Python framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'Flask (Python framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'Express.js (Node.js framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'Ruby on Rails (Ruby framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'Laravel (PHP framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'Symfony (PHP framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => 'ASP.NET (C# framework)', 'type' => TechnologyTypeEnum::Frameworks]);
-        DB::table('technologies')->insert(['name' => '.NET Core (C# framework)', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Django', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Flask', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Express.js', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Ruby on Rails', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Laravel', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'Symfony', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => 'ASP.NET', 'type' => TechnologyTypeEnum::Frameworks]);
+        DB::table('technologies')->insert(['name' => '.NET Core', 'type' => TechnologyTypeEnum::Frameworks]);
 
-        DB::table('technologies')->insert(['name' => 'AWS (Amazon Web Services)', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
+        DB::table('technologies')->insert(['name' => 'AWS', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Kubernetes', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Docker', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);
         DB::table('technologies')->insert(['name' => 'Node.js', 'type' => TechnologyTypeEnum::Platforms_and_Tools]);

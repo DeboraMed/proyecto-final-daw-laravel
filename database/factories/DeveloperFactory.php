@@ -25,7 +25,7 @@ class DeveloperFactory extends Factory
             'work_mode' => fake()->randomElement(WorkModeEnum::cases())->value,
             'schedule' => fake()->randomElement(ScheduleEnum::cases())->value,
             'specialization' => fake()->randomElement(SpecializationEnum::cases())->value,
-            'github_url' => fake()->url()
+            'github_url' => 'https://github.com/tu-github' //fake()->url()
         ];
     }
 }

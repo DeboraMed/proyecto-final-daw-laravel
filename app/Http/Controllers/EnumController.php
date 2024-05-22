@@ -28,7 +28,8 @@ class EnumController extends Controller
     {
         $array = [];
         foreach ($enum::cases() as $case) {
-            $array[$case->name] = $case->value;
+            # $array[$case->name] = $case->value;
+            $array[$case->value] = $case->value;
         }
         return $array;
     }
