@@ -55,19 +55,25 @@ class AuthController extends Controller
     {
         # TODO: Considerar actualizar el avatar en un endpoint aparte
 
-        $input_data = $request->validate([
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_data' => 'required|json'
+        ]);
+
+        $userData = json_decode($request->input('user_data'), true);
+
+        $input_data = validator($userData, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', Password::defaults()],
             'description' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'user_type' => 'required|string|in:empresa,desarrollador',
-        ]);
+        ])->validate();
 
         // Crear la empresa o el desarrollador según el tipo de usuario
-        if ($request->user_type === 'empresa') {
+        if ($input_data['user_type'] === 'empresa') {
             $userable = Company::create();
         } else {
             $userable = Developer::create();

@@ -8,40 +8,18 @@ Content-Type: image/png
 
 < ./img/company.png
 --boundary
-Content-Disposition: form-data; name="name"
-Content-Type: text/plain
+Content-Disposition: form-data; name="user_data"
+Content-Type: application/json
 
-Nueva Empresa
---boundary
-Content-Disposition: form-data; name="email"
-Content-Type: text/plain
-
-nuevo@empresa.com
---boundary
-Content-Disposition: form-data; name="password"
-Content-Type: text/plain
-
-mi_contraseña_segura
---boundary
-Content-Disposition: form-data; name="user_type"
-Content-Type: text/plain
-
-empresa
---boundary
-Content-Disposition: form-data; name="description"
-Content-Type: text/plain
-
-Mi Descripcion
---boundary
-Content-Disposition: form-data; name="phone"
-Content-Type: text/plain
-
-762 812 345
---boundary
-Content-Disposition: form-data; name="address"
-Content-Type: text/plain
-
-Mi Direccion de Empresa
+{
+    "name": "Nueva Empresa",
+    "email": "nuevo@empresa.com",
+    "password": "mi_contraseña_segura",
+    "user_type": "empresa",
+    "description": "Mi Descripcion",
+    "phone": "762 812 345",
+    "address": "Mi Direccion de Empresa"
+}
 --boundary--
 
 ### Registra un nuevo usuario de tipo Desarrollador.
@@ -54,40 +32,18 @@ Content-Type: image/png
 
 < ./img/developer.png
 --boundary
-Content-Disposition: form-data; name="name"
-Content-Type: text/plain
+Content-Disposition: form-data; name="user_data"
+Content-Type: application/json
 
-Nuevo Desarrollador
---boundary
-Content-Disposition: form-data; name="email"
-Content-Type: text/plain
-
-nuevo@desarrollador.com
---boundary
-Content-Disposition: form-data; name="password"
-Content-Type: text/plain
-
-mi_contraseña_segura
---boundary
-Content-Disposition: form-data; name="user_type"
-Content-Type: text/plain
-
-desarrollador
---boundary
-Content-Disposition: form-data; name="description"
-Content-Type: text/plain
-
-Mi Descripcion
---boundary
-Content-Disposition: form-data; name="phone"
-Content-Type: text/plain
-
-456 34 23 43
---boundary
-Content-Disposition: form-data; name="address"
-Content-Type: text/plain
-
-Mi Direccion de Desarrollador
+{
+    "name": "Nuevo Desarrollador",
+    "email": "nuevo@desarrollador.com",
+    "password": "mi_contraseña_segura",
+    "user_type": "desarrollador",
+    "description": "Mi Descripcion",
+    "phone": "456 34 23 43",
+    "address": "Mi Direccion de Desarrollador"
+}
 --boundary--
 
 ### Accede al sistema como "EMPRESA" y devuelve un token.
