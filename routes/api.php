@@ -27,6 +27,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('experience-level', [EnumController::class, 'experienceLevel']);
     Route::get('technology-type', [EnumController::class, 'technologyType']);
     Route::get('technologies', [TechnologyController::class, 'index']);
+
+    Route::get('developer/all', [DeveloperController::class, 'index']);
+    Route::get('vacancies/all', [VacancyController::class, 'index_all']);
+    Route::get('developer/{id}', [DeveloperController::class, 'show']);
 });
 
 // Metodos que requieren autenticacion via token.
@@ -45,7 +49,4 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'v1', 'namespace' =>
     Route::apiResource('experiences', ExperienceController::class);
     Route::apiResource('education', EducationController::class);
     Route::apiResource('vacancies', VacancyController::class);
-
-    Route::get('developer/all', [DeveloperController::class, 'index']);
-    Route::get('vacancies/all', [VacancyController::class, 'index_all']);
 });

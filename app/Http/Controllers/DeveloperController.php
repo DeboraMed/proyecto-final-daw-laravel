@@ -20,6 +20,11 @@ class DeveloperController extends Controller
     public function index()
     {
         //
-        return response()->json(['deverlopers' => Developer::with('user')->get()], 200);
+        return response()->json(['developers' => Developer::with('user')->get()], 200);
+    }
+
+    public function show($id)
+    {
+        return response()->json(['developer' => Developer::with(['user', 'projects.technologies'])->findOrFail($id)], 200);
     }
 }

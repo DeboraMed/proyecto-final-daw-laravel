@@ -11,4 +11,6 @@ Content-Type: application/json
 
 ### Obtener todos los desarrolladores del sistema
 GET http://localhost:8000/api/v1/developer/all
-Authorization: Bearer {{auth_token}}
+
+### Obtener todos los desarrolladores del sistema
+GET http://localhost:8000/api/v1/developer/3
