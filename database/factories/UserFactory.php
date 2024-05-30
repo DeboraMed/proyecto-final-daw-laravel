@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Company;
 use App\Models\Developer;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -33,7 +34,17 @@ class UserFactory extends Factory
         $randomUserType = fake()->randomElement($userTypesArray);
         $userable = $randomUserType::factory()->create();
 
-        $name = $randomUserType == Developer::class ? fake()->name() : fake()->words(2, true);
+        if($randomUserType == Developer::class) {
+            $name = fake()->name();
+            $files = File::files('public/storage/examples/developers');
+            $randomFile = 'examples/developers/' . $files[array_rand($files)]->getFilename();
+        }
+        else {
+            $name = fake()->words(2, true);
+            $files = File::files('public/storage/examples/companies');
+            $randomFile = 'examples/companies/' . $files[array_rand($files)]->getFilename();
+        }
+
 
         return [
             'name' => $name,
@@ -44,7 +55,7 @@ class UserFactory extends Factory
             'description' => fake()->paragraph(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'avatar' => fake()->image('public/storage', 50, 50, 'user', false),
+            'avatar' => $randomFile,
             'userable_type' => $randomUserType,
             'userable_id' => $userable->id,
         ];

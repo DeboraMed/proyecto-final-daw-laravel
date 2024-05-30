@@ -2,7 +2,8 @@
 /node_modules
 /public/build
 /public/hot
-/public/storage
+/public/storage/*
+!/public/storage/examples/
 /storage/*.key
 /vendor
 .phpunit.result.cache
