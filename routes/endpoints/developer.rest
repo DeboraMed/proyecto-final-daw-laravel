@@ -1,16 +1,5 @@
-### Accede al sistema como "EMPRESA" y devuelve un token.
-POST http://localhost:8000/api/v1/login
-Content-Type: application/json
+### Obtener 10 desarrolladores aleatorios
+GET http://localhost:8000/api/v1/developer/random
 
-{
-    "email": "comp@test.com",
-    "password": "comp_password"
-}
-
-> {% client.global.set("auth_token", response.body.token); %}
-
-### Obtener todos los desarrolladores del sistema
-GET http://localhost:8000/api/v1/developer/all
-
-### Obtener todos los desarrolladores del sistema
+### Obtener todos los datos de un desarrollador
 GET http://localhost:8000/api/v1/developer/3

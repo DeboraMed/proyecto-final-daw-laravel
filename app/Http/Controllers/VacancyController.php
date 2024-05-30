@@ -31,10 +31,10 @@ class VacancyController extends Controller
         return response()->json(['vacancies' => $vacancies], 200);
     }
 
-    public function index_all()
+    public function random()
     {
         //
-        return response()->json(['vacancies' => Vacancy::with('company.user', 'technologies')->get()], 200);
+        return response()->json(['vacancies' => Vacancy::with('company.user', 'technologies')->take(10)->inRandomOrder()->get()], 200);
     }
 
     /**

@@ -21,7 +21,7 @@ class VacancyFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->paragraph(),
+            'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'date' => fake()->date(),
             'contract_type' => fake()->randomElement(ContractTypeEnum::cases())->value,

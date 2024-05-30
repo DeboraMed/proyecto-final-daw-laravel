@@ -33,8 +33,10 @@ class UserFactory extends Factory
         $randomUserType = fake()->randomElement($userTypesArray);
         $userable = $randomUserType::factory()->create();
 
+        $name = $randomUserType == Developer::class ? fake()->name() : fake()->words(2, true);
+
         return [
-            'name' => fake()->name(),
+            'name' => $name,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

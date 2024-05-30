@@ -15,16 +15,10 @@ use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class DeveloperController extends Controller
+class CompanyController extends Controller
 {
-    public function random()
-    {
-        //
-        return response()->json(['developers' => Developer::with('user')->take(10)->inRandomOrder()->get()], 200);
-    }
-
     public function show($id)
     {
-        return response()->json(['developer' => Developer::with(['user', 'projects.technologies'])->findOrFail($id)], 200);
+        return response()->json(['company' => Company::with(['user', 'vacancies.technologies'])->findOrFail($id)], 200);
     }
 }

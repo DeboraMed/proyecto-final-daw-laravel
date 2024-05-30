@@ -18,8 +18,8 @@ class EducationFactory extends Factory
     public function definition(): array
     {
         return [
-            'institution' => fake()->paragraph(),
-            'qualification' => fake()->paragraph(),
+            'institution' => fake()->sentence(),
+            'qualification' => fake()->sentence(),
             'completion_date' => fake()->date(),
             'academic_level' => fake()->randomElement(AcademicLevelEnum::cases())->value,
         ];

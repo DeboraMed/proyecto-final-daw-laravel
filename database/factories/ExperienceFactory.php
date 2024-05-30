@@ -18,7 +18,7 @@ class ExperienceFactory extends Factory
     public function definition(): array
     {
         return [
-            'company_name' => fake()->paragraph(),
+            'company_name' => fake()->words(2, true),
             'description' => fake()->paragraph(),
             'start_date' => fake()->date(),
             'end_date' => fake()->date(),

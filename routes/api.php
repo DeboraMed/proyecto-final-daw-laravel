@@ -28,9 +28,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('technology-type', [EnumController::class, 'technologyType']);
     Route::get('technologies', [TechnologyController::class, 'index']);
 
-    Route::get('developer/all', [DeveloperController::class, 'index']);
-    Route::get('vacancies/all', [VacancyController::class, 'index_all']);
+    Route::get('developer/random', [DeveloperController::class, 'random']);
+    Route::get('vacancies/random', [VacancyController::class, 'random']);
     Route::get('developer/{id}', [DeveloperController::class, 'show']);
+    Route::get('company/{id}', [DeveloperController::class, 'show']);
 });
 
 // Metodos que requieren autenticacion via token.
