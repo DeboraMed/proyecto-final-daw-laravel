@@ -3,3 +3,6 @@ GET http://localhost:8000/api/v1/developer/random
 
 ### Obtener todos los datos de un desarrollador
 GET http://localhost:8000/api/v1/developer/3
+
+### Obtener todos los datos de un desarrollador
+GET http://localhost:8000/api/v1/developer?contract_type=Indefinido

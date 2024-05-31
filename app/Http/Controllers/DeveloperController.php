@@ -17,6 +17,28 @@ use Illuminate\Validation\Rule;
 
 class DeveloperController extends Controller
 {
+    public function index(Request $request)
+    {
+        $query = Developer::query();
+
+        if ($request->has('specialization')) {
+            $query->where('specialization', $request->input('specialization'));
+        }
+        if ($request->has('schedule')) {
+            $query->where('schedule', $request->input('schedule'));
+        }
+        if ($request->has('work_mode')) {
+            $query->where('work_mode', $request->input('work_mode'));
+        }
+        if ($request->has('contract_type')) {
+            $query->where('contract_type', $request->input('contract_type'));
+        }
+
+        #TODO: Incluir paginaciones
+        #return response()->json(['developers' => $query->paginate(10)], 200);
+        return response()->json(['developers' => $query->with('user')->get()], 200);
+    }
+
     public function random()
     {
         //

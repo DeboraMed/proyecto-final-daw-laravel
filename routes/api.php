@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('developer/random', [DeveloperController::class, 'random']);
     Route::get('vacancies/random', [VacancyController::class, 'random']);
     Route::get('developer/{id}', [DeveloperController::class, 'show']);
+    Route::get('developer', [DeveloperController::class, 'index']);
     Route::get('company/{id}', [CompanyController::class, 'show']);
 });
 
