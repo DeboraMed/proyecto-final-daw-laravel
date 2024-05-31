@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EnumController;
@@ -31,7 +32,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'], function
     Route::get('developer/random', [DeveloperController::class, 'random']);
     Route::get('vacancies/random', [VacancyController::class, 'random']);
     Route::get('developer/{id}', [DeveloperController::class, 'show']);
-    Route::get('company/{id}', [DeveloperController::class, 'show']);
+    Route::get('company/{id}', [CompanyController::class, 'show']);
 });
 
 // Metodos que requieren autenticacion via token.
