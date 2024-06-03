@@ -11,5 +11,3 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
     unzip
 
 RUN docker-php-ext-install pdo pdo_mysql sockets zip
-
-RUN touch /app/database/database.sqlite
