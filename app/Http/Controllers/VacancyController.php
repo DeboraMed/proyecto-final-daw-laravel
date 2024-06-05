@@ -31,6 +31,26 @@ class VacancyController extends Controller
         return response()->json(['vacancies' => $vacancies], 200);
     }
 
+    public function query(Request $request)
+    {
+        $query = Vacancy::query();
+
+        if ($request->has('specialization')) {
+            $query->where('specialization', $request->input('specialization'));
+        }
+        if ($request->has('schedule')) {
+            $query->where('schedule', $request->input('schedule'));
+        }
+        if ($request->has('work_mode')) {
+            $query->where('work_mode', $request->input('work_mode'));
+        }
+        if ($request->has('contract_type')) {
+            $query->where('contract_type', $request->input('contract_type'));
+        }
+
+        return response()->json(['vacancies' => $query->with('company.user', 'technologies')->get()], 200);
+    }
+
     public function random()
     {
         //
