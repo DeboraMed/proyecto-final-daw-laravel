@@ -35,8 +35,8 @@ class VacancyController extends Controller
     {
         $query = Vacancy::query();
 
-        if ($request->has('specialization')) {
-            $query->where('specialization', $request->input('specialization'));
+        if ($request->has('academic_level')) {
+            $query->where('academic_level', $request->input('academic_level'));
         }
         if ($request->has('schedule')) {
             $query->where('schedule', $request->input('schedule'));
