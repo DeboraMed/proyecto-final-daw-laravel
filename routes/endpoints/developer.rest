@@ -1,4 +1,4 @@
-### Obtener 10 desarrolladores aleatorios
+### Obtener todos los desarrolladores ordenados aleatoriamente en modo paginado
 GET http://localhost:8000/api/v1/developer/random
 
 ### Obtener todos los datos de un desarrollador

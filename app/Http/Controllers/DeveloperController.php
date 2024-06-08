@@ -34,15 +34,13 @@ class DeveloperController extends Controller
             $query->where('contract_type', $request->input('contract_type'));
         }
 
-        #TODO: Incluir paginaciones
-        #return response()->json(['developers' => $query->paginate(10)], 200);
         return response()->json(['developers' => $query->with('user')->get()], 200);
     }
 
     public function random()
     {
         //
-        return response()->json(['developers' => Developer::with('user')->take(10)->inRandomOrder()->get()], 200);
+        return response()->json(['developers' => Developer::with('user')->take(10)->inRandomOrder()->paginate(10)], 200);
     }
 
     public function show($id)
