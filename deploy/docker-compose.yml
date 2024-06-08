@@ -1,0 +1,36 @@
+services:
+
+  # Servicio Backend
+  backend:
+    # Contruye la imagen desde un Dockerfile del Backend
+    build: backend/.
+    # Mapeamos nuestra aplicación 
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    # Variables de entorno
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+    #  - APP_ENV=docker
+    # Instala composer, actualiza dependencias y ejecuta la aplicacion
+    command: >
+      sh -c "composer install && touch /app/database/database.sqlite &&
+             php artisan serve --host=0.0.0.0 --port=8000"    
+    # Exponemos el puerto para que nuestra maquina pueda encontrar el backend
+    ports:
+      - "8000:8000"
+    restart: always
+
+      
+  # Servicio Frontend
+  frontend:
+    # Imagen de Node
+    image: node:18
+    # Mapeamos nuestra aplicación
+    volumes:
+      - ./frontend:/home/node/app
+    working_dir: /home/node/app
+    # Instala dependencias y ejecuta la aplicacion
+    command: >
+      sh -c "npm install &&
+             npm run dev -- --host"
