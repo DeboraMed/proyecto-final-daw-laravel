@@ -17,9 +17,11 @@ class EducationFactory extends Factory
      */
     public function definition(): array
     {
+        $instituciones = ['Universidad', 'Colegio', 'Instituto'];
+
         return [
-            'institution' => fake()->sentence(),
-            'qualification' => fake()->sentence(),
+            'institution' => $instituciones[array_rand($instituciones)] . ' de ' . fake()->city(),
+            'qualification' => ucwords(fake()->words(2, true)),
             'completion_date' => fake()->date(),
             'academic_level' => fake()->randomElement(AcademicLevelEnum::cases())->value,
         ];

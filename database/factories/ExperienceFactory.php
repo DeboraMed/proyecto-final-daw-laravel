@@ -17,11 +17,14 @@ class ExperienceFactory extends Factory
      */
     public function definition(): array
     {
+        $date1 = fake()->date();
+        $date2 = fake()->date();
+
         return [
-            'company_name' => fake()->words(2, true),
+            'company_name' => ucwords(fake()->words(2, true, )),
             'description' => fake()->paragraph(),
-            'start_date' => fake()->date(),
-            'end_date' => fake()->date(),
+            'start_date' => min($date1, $date2),
+            'end_date' => max($date1, $date2),
             'level' => fake()->randomElement(ExperienceLevelEnum::cases())->value,
         ];
     }

@@ -40,7 +40,7 @@ class UserFactory extends Factory
             $randomFile = 'examples/developers/' . $files[array_rand($files)]->getFilename();
         }
         else {
-            $name = fake()->words(2, true);
+            $name = ucwords(fake()->words(2, true));
             $files = File::files('public/storage/examples/companies');
             $randomFile = 'examples/companies/' . $files[array_rand($files)]->getFilename();
         }

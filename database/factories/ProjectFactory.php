@@ -21,7 +21,7 @@ class ProjectFactory extends Factory
         $randomFile = 'examples/projects/' . $files[array_rand($files)]->getFilename();
 
         return [
-            'title' => fake()->sentence(),
+            'title' => ucwords(fake()->words(4, true)),
             'description' => fake()->paragraph(),
             'img_url' => $randomFile,
         ];
