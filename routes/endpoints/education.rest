@@ -21,7 +21,7 @@ Content-Type: application/json
 {
     "institution": "Mi Instituto",
     "qualification": "Grado Superior en Desarrollo de Aplicaciones Web",
-    "academic_level": "FP2 Grado Superior",
+    "academic_level": "Ciclo Formativo de Grado Superior",
     "completion_date": "2024-05-01"
 }
 

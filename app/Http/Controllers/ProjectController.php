@@ -56,6 +56,8 @@ class ProjectController extends Controller
             $project->technologies()->attach($technology->id);
         }
 
+        $project->load('technologies');
+
         return response()->json(['project' => $project], 201);
     }
 
