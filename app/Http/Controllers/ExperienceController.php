@@ -54,6 +54,8 @@ class ExperienceController extends Controller
             $experience->technologies()->attach($technology->id);
         }
 
+        $experience->load('technologies');
+
         return response()->json(['experience' => $experience], 201);
     }
 
