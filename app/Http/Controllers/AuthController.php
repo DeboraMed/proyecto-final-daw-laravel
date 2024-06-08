@@ -104,7 +104,7 @@ class AuthController extends Controller
             'userable.work_mode' => Rule::enum(WorkModeEnum::class),
             'userable.schedule' => Rule::enum(ScheduleEnum::class),
             'userable.specialization' => Rule::enum(SpecializationEnum::class),
-            'userable.github_url' => 'url',
+            'userable.github_url' => 'nullable|url',
         ]);
 
         $user->update($input_data);
