@@ -14,7 +14,7 @@ services:
     #  - APP_ENV=docker
     # Instala composer, actualiza dependencias y ejecuta la aplicacion
     command: >
-      sh -c "composer install && touch /app/database/database.sqlite &&
+      sh -c "service cron start && composer install && touch /app/database/database.sqlite &&
              php artisan serve --host=0.0.0.0 --port=8000"    
     # Exponemos el puerto para que nuestra maquina pueda encontrar el backend
     ports:
@@ -34,3 +34,10 @@ services:
     command: >
       sh -c "npm install &&
              npm run dev -- --host"
+    # Exponemos el puerto para que nuestra maquina pueda encontrar el frontend
+    ports:
+      - "5173:5173"
+    restart: always
+    # Definimos dependencia con el servicio de backend
+    depends_on:
+      - backend

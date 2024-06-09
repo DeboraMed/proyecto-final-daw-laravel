@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\JobMatchController;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+# Configuración para que el matchmaking se ejecute cada 5 minutos.
+Schedule::call(function () {
+    JobMatchController::refreshMatches();
+})->everyFiveMinutes();
